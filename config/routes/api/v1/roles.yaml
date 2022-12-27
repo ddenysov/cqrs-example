@@ -1,0 +1,68 @@
+list:
+    path: /
+    controller: App\Users\Delivery\Api\V1\Roles\Controllers\ListController
+    methods: GET
+    defaults:
+        operation: 'getSearchRoles'
+        responses:
+            200: 'schemas/RoleSearchResult'
+
+create:
+    path: /
+    controller: App\Users\Delivery\Api\V1\Roles\Controllers\CreateController
+    methods: POST
+    defaults:
+        operation: 'postCreateRole'
+        responses:
+            200: 'schemas/Role'
+
+view:
+    path: /{id}
+    controller: App\Users\Delivery\Api\V1\Roles\Controllers\ViewController
+    methods: GET
+    requirements:
+        id: '%route.requirements.uuid%'
+    defaults:
+        operation: 'getSearchPermissions'
+        responses:
+            200: 'schemas/Role'
+            404: 'schemas/Error'
+
+change_roles:
+    path: /{id}/roles
+    controller: App\Users\Delivery\Api\V1\Roles\Controllers\ChangeRolesController
+    methods: PUT|PATCH
+    requirements:
+        id: '%route.requirements.uuid%'
+    defaults:
+        operation: 'putChangeGrantableRoles'
+        responses:
+            200: 'schemas/Role'
+            400: 'schemas/Error'
+            404: 'schemas/Error'
+
+change_permissions:
+    path: /{id}/permissions
+    controller: App\Users\Delivery\Api\V1\Roles\Controllers\ChangePermissionsController
+    methods: PUT|PATCH
+    requirements:
+        id: '%route.requirements.uuid%'
+    defaults:
+        operation: 'putChangeRolePermissions'
+        responses:
+            200: 'schemas/Role'
+            400: 'schemas/Error'
+            404: 'schemas/Error'
+
+destroy:
+    path: /{id}
+    controller: App\Users\Delivery\Api\V1\Roles\Controllers\DestroyController
+    methods: DELETE
+    requirements:
+        id: '%route.requirements.uuid%'
+    defaults:
+        operation: 'deleteRole'
+        responses:
+            204: ~
+            400: 'schemas/Error'
+            404: 'schemas/Error'

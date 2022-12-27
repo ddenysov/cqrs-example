@@ -1,0 +1,39 @@
+
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+
+    Somnambulist\Components\Events\Publishers\DoctrineEventPublisher:
+        tags: ['doctrine.event_subscriber']
+
+    Somnambulist\Components\Events\Adapters\DomainEventNormalizer:
+
+    Somnambulist\Components\Commands\CommandBus:
+        alias: Somnambulist\Components\Commands\Adapters\MessengerCommandBus
+        public: true
+
+    Somnambulist\Components\Commands\Adapters\MessengerCommandBus:
+
+    Somnambulist\Components\Events\EventBus:
+        alias: Somnambulist\Components\Events\Adapters\MessengerEventBus
+        public: true
+
+    Somnambulist\Components\Jobs\Adapters\MessengerJobQueue:
+
+    Somnambulist\Components\Jobs\JobQueue:
+        alias: Somnambulist\Components\Jobs\Adapters\MessengerJobQueue
+        public: true
+
+    Somnambulist\Components\Events\Adapters\MessengerEventBus:
+
+    Somnambulist\Components\Queries\QueryBus:
+        alias: Somnambulist\Components\Queries\Adapters\MessengerQueryBus
+        public: true
+
+    Somnambulist\Components\Queries\Adapters\MessengerQueryBus:
+
+    Somnambulist\Bundles\ApiBundle\ArgumentResolvers\:
+        resource: '../../vendor/somnambulist/api-bundle/src/ArgumentResolvers/'
+        tags:
+            - { name: controller.argument_value_resolver, priority: 105 }
